@@ -370,6 +370,7 @@ export default function App() {
   const [hintIndex, setHintIndex] = useState(0);
   const [showRescuedModal, setShowRescuedModal] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const lang = state.language;
@@ -588,6 +589,9 @@ export default function App() {
     setHintIndex(0);
     setInputValue('');
     setShowRescuedModal(false);
+    requestAnimationFrame(() => {
+      if (chatContainerRef.current) chatContainerRef.current.scrollTop = 0;
+    });
   }, [lang]);
 
   // ─── Render ────────────────────────────────────────────────────────────────
@@ -729,17 +733,19 @@ export default function App() {
             </div>
           )}
           {/* Chat messages */}
-          <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
-            {state.history.map((msg) => (
-              <ChatBubble key={msg.timestamp} msg={msg} />
-            ))}
-            {isLoading && (
-              <div className="flex items-center gap-2 text-amber-300 text-sm pl-10">
-                <i className="fa-solid fa-spinner fa-spin" />
-                <span>{lang === 'ca' ? 'Generant pista...' : 'Generando pista...'}</span>
-              </div>
-            )}
-            <div ref={chatEndRef} />
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto">
+            <div className="flex flex-col min-h-full justify-end px-3 py-4 space-y-1">
+              {state.history.map((msg) => (
+                <ChatBubble key={msg.timestamp} msg={msg} />
+              ))}
+              {isLoading && (
+                <div className="flex items-center gap-2 text-amber-300 text-sm pl-10">
+                  <i className="fa-solid fa-spinner fa-spin" />
+                  <span>{lang === 'ca' ? 'Generant pista...' : 'Generando pista...'}</span>
+                </div>
+              )}
+              <div ref={chatEndRef} />
+            </div>
           </div>
 
           {/* Quick hint button */}
