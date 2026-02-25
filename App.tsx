@@ -250,13 +250,13 @@ function Sidebar({
         <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
           {state.rescued && (
             <div className="text-xs text-amber-300/70 font-semibold px-2 pb-1">
-              {lang === 'ca' ? '📖 Revisa qualsevol missió:' : '📖 Revisa cualquier misión:'}
+              {lang === 'ca' ? '🎉 Joc completat!' : '🎉 ¡Juego completado!'}
             </div>
           )}
           {MISSIONS.map((mission, idx) => {
             const done = state.completedMissions.includes(mission.id);
             const isCurrent = state.currentMission === idx && !state.rescued;
-            const isLocked = !done && !isCurrent && !state.rescued;
+            const isLocked = !done && !isCurrent;
             return (
               <button
                 key={mission.id}
@@ -266,9 +266,7 @@ function Sidebar({
                   isCurrent
                     ? 'bg-amber-500/20 border-amber-500/50 text-amber-200'
                     : done
-                    ? 'bg-green-500/10 border-green-500/30 text-green-300 hover:bg-green-500/20 cursor-pointer'
-                    : state.rescued
-                    ? 'bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700 cursor-pointer'
+                    ? 'bg-green-500/10 border-green-500/30 text-green-300'
                     : 'bg-slate-800/40 border-slate-700/40 text-gray-600 cursor-not-allowed opacity-50'
                 }`}
               >
@@ -440,8 +438,8 @@ export default function App() {
 
   const handleJumpToLevel = useCallback((idx: number) => {
     const mission = MISSIONS[idx];
-    const isAccessible = state.rescued || state.completedMissions.includes(mission.id) || state.currentMission === idx;
-    if (!isAccessible) return;
+    const isAccessible = state.completedMissions.includes(mission.id) || state.currentMission === idx;
+    if (!isAccessible || state.rescued) return;
     setState((prev) => {
       const history: ChatMessage[] = [
         {
@@ -726,9 +724,9 @@ export default function App() {
           {/* Review mode banner */}
           {state.rescued && !showRescuedModal && (
             <div className="flex-shrink-0 flex items-center justify-between gap-2 px-3 py-2 bg-amber-500/10 border-b border-amber-500/20 text-amber-300 text-xs font-semibold">
-              <span>📖 {lang === 'ca' ? 'Mode revisió — consulta qualsevol missió des del menú' : 'Modo revisión — consulta cualquier misión desde el menú'}</span>
+              <span>🎉 {lang === 'ca' ? 'Joc completat! Tots els recursos aconseguits.' : 'Joc completat! Tots els recursos aconseguidos.'}</span>
               <button onClick={() => setShowRescuedModal(true)} className="flex-shrink-0 text-amber-300 hover:text-white underline">
-                {lang === 'ca' ? 'Veure resultat' : 'Ver resultado'}
+                {lang === 'ca' ? 'Veure rescat' : 'Ver rescate'}
               </button>
             </div>
           )}
