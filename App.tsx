@@ -199,12 +199,12 @@ function HelpModal({ lang, onClose }: { lang: Language; onClose: () => void }) {
   const steps = UI_STRINGS.helpSteps[lang];
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-6 shadow-2xl">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-6 shadow-2xl flex flex-col max-h-[90vh]">
+        <div className="flex justify-between items-center mb-4 flex-shrink-0">
           <h2 className="text-xl font-black text-white">{UI_STRINGS.helpTitle[lang]}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white text-2xl leading-none">×</button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-y-auto flex-1 pr-1">
           {steps.map((step, i) => (
             <div key={i} className="flex gap-3 items-start">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow">
@@ -219,7 +219,7 @@ function HelpModal({ lang, onClose }: { lang: Language; onClose: () => void }) {
         </div>
         <button
           onClick={onClose}
-          className="mt-6 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-sm hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg"
+          className="mt-6 flex-shrink-0 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-sm hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg"
         >
           {lang === 'ca' ? '¡Endavant!' : '¡Adelante!'}
         </button>
