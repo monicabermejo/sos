@@ -248,10 +248,15 @@ function Sidebar({
           <button onClick={onClose} className="text-gray-400 hover:text-white text-xl">×</button>
         </div>
         <div className="flex-1 overflow-y-auto p-3 space-y-1.5">
+          {state.rescued && (
+            <div className="text-xs text-amber-300/70 font-semibold px-2 pb-1">
+              {lang === 'ca' ? '📖 Revisa qualsevol missió:' : '📖 Revisa cualquier misión:'}
+            </div>
+          )}
           {MISSIONS.map((mission, idx) => {
             const done = state.completedMissions.includes(mission.id);
             const isCurrent = state.currentMission === idx && !state.rescued;
-            const isLocked = !done && !isCurrent;
+            const isLocked = !done && !isCurrent && !state.rescued;
             return (
               <button
                 key={mission.id}
@@ -262,6 +267,8 @@ function Sidebar({
                     ? 'bg-amber-500/20 border-amber-500/50 text-amber-200'
                     : done
                     ? 'bg-green-500/10 border-green-500/30 text-green-300 hover:bg-green-500/20 cursor-pointer'
+                    : state.rescued
+                    ? 'bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700 cursor-pointer'
                     : 'bg-slate-800/40 border-slate-700/40 text-gray-600 cursor-not-allowed opacity-50'
                 }`}
               >
@@ -408,7 +415,7 @@ export default function App() {
 
   const handleJumpToLevel = useCallback((idx: number) => {
     const mission = MISSIONS[idx];
-    const isAccessible = state.completedMissions.includes(mission.id) || state.currentMission === idx;
+    const isAccessible = state.rescued || state.completedMissions.includes(mission.id) || state.currentMission === idx;
     if (!isAccessible) return;
     setState((prev) => {
       const history: ChatMessage[] = [
@@ -427,7 +434,7 @@ export default function App() {
       return { ...prev, currentMission: idx, history };
     });
     setHintIndex(0);
-  }, [state.completedMissions, state.currentMission]);
+  }, [state.completedMissions, state.currentMission, state.rescued]);
 
   const handleHint = useCallback(async () => {
     const mission = MISSIONS[state.currentMission];

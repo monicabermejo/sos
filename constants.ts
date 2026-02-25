@@ -15,8 +15,8 @@ export const MISSIONS: Mission[] = [
       es: '☀️ Te despiertas en la playa. El calor es brutal. Encuentras un manantial oculto entre las rocas. Pero necesitas calcular cuánta agua puedes almacenar.',
     },
     challenge: {
-      ca: '🪣 Un dipòsit d\'aigua té una capacitat total de <strong>15 litres</strong>. Actualment, el dipòsit conté una quantitat desconeguda d\'aigua (<em>x</em>). Si hi afegim <strong>un terç</strong> de la quantitat que ja hi ha dins, més <strong>7 litres</strong> addicionals, el dipòsit queda completament ple.<br/><br/>Quants litres d\'aigua hi havia inicialment?',
-      es: '🪣 Un depósito de agua tiene una capacidad total de <strong>15 litros</strong>. Actualmente, el depósito contiene una cantidad desconocida de agua (<em>x</em>). Si añadimos <strong>un tercio</strong> de la cantidad que ya hay dentro, más <strong>7 litros</strong> adicionales, el depósito queda completamente lleno.<br/><br/>¿Cuántos litros de agua había inicialmente?',
+      ca: '🪣 Un dipòsit d\'aigua té una capacitat total de <strong>15 litres</strong>. Actualment, el dipòsit conté una quantitat desconeguda d\'aigua. Si hi afegim <strong>un terç</strong> de la quantitat que ja hi ha dins, més <strong>7 litres</strong> addicionals, el dipòsit queda completament ple.<br/><br/>Quants litres d\'aigua hi havia inicialment?',
+      es: '🪣 Un depósito de agua tiene una capacidad total de <strong>15 litros</strong>. Actualmente, el depósito contiene una cantidad desconocida de agua. Si añadimos <strong>un tercio</strong> de la cantidad que ya hay dentro, más <strong>7 litros</strong> adicionales, el depósito queda completamente lleno.<br/><br/>¿Cuántos litros de agua había inicialmente?',
     },
     equation: 'x + x/3 + 7 = 15',
     expectedAnswer: '6',
@@ -351,8 +351,8 @@ export const MISSIONS: Mission[] = [
       es: '🏆 El capitán aparece en la borda y te grita: "¡Demuéstrame que eres lo suficientemente listo/a para navegar con nosotros! ¡Resuelve las tres ecuaciones que te mando por radio y te bajaré la escalera!"',
     },
     challenge: {
-      ca: '📻 El capità t\'envia tres equacions complexes. Resol-les totes i escriu les tres respostes separades per comes: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Equació 1</strong> (parèntesis + negatiu):<br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Equació 2</strong> (tres fraccions):<br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Equació 3</strong> (quatre parèntesis):<br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
-      es: '📻 El capitán te manda tres ecuaciones complejas. Resuélvelas todas y escribe las tres respuestas separadas por comas: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Ecuación 1</strong> (paréntesis + negativo):<br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Ecuación 2</strong> (tres fracciones):<br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Ecuación 3</strong> (cuatro paréntesis):<br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
+      ca: '📻 El capità t\'envia tres equacions. Resol-les i escriu les tres respostes <strong>separades per comes</strong> en aquest ordre: <em>resposta 1, resposta 2, resposta 3</em><br/><br/>📌 <strong>Equació 1:</strong><br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Equació 2:</strong><br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Equació 3:</strong><br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
+      es: '📻 El capitán te manda tres ecuaciones. Resuélvelas y escribe las tres respuestas <strong>separadas por comas</strong> en este orden: <em>respuesta 1, respuesta 2, respuesta 3</em><br/><br/>📌 <strong>Ecuación 1:</strong><br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Ecuación 2:</strong><br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Ecuación 3:</strong><br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
     },
     equation: '4(x+1)-2(x-3)=3(x+5)+1 | (x+4)/3+(2x-1)/6=(x+7)/2 | 5(x-2)-2(3x+1)=4(x-3)-3(2x-5)',
     expectedAnswer: '-6,14,15',
