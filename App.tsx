@@ -525,7 +525,6 @@ export default function App() {
             daysOnIsland: prev.daysOnIsland + 1,
             history: [
               ...prev.history,
-              { role: 'user', text: raw, timestamp: Date.now() - 1 },
               { role: 'assistant', text: correctText, timestamp: Date.now() },
               {
                 role: 'assistant',
@@ -548,7 +547,6 @@ export default function App() {
           daysOnIsland: prev.daysOnIsland + 1,
           history: [
             ...prev.history,
-            { role: 'user', text: raw, timestamp: Date.now() - 1 },
             { role: 'assistant', text: correctText, timestamp: Date.now() },
             {
               role: 'assistant',
