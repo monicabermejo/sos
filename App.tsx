@@ -298,35 +298,54 @@ function Sidebar({
   );
 }
 
-function RescuedScreen({ lang, onRestart }: { lang: Language; onRestart: () => void }) {
+function RescuedModal({ lang, onClose, onRestart }: { lang: Language; onClose: () => void; onRestart: () => void }) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center p-8 text-center animate-slide-up">
-      <div className="text-7xl mb-6 animate-bounce">🚢</div>
-      <h1 className="text-3xl font-black text-white mb-3">
-        {lang === 'ca' ? '¡ RESCATADA/AT !' : '¡ RESCATADO/A !'}
-      </h1>
-      <p className="text-amber-200 text-lg mb-2 font-semibold">
-        {lang === 'ca' ? 'Has resolt totes les equacions!' : '¡Has resuelto todas las ecuaciones!'}
-      </p>
-      <p className="text-gray-300 text-sm mb-8 max-w-xs">
-        {lang === 'ca'
-          ? 'Gràcies a les teves habilitats matemàtiques, has aconseguit tots els recursos per ser rescatat/ada. Ets un/a autèntic/a X-Hunter!'
-          : 'Gracias a tus habilidades matemáticas, has conseguido todos los recursos para ser rescatado/a. ¡Eres un auténtico X-Hunter!'}
-      </p>
-      <div className="grid grid-cols-4 gap-3 mb-8">
-        {MISSIONS.map((m) => (
-          <div key={m.id} className="flex flex-col items-center gap-1">
-            <span className="text-2xl">{m.emoji}</span>
-            <span className="text-xs text-green-400 font-bold">✓</span>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+      <div className="bg-slate-800 border border-amber-500/30 rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-slide-up">
+        <div className="flex justify-end mb-1">
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white text-2xl leading-none w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-700 transition-colors"
+            title={lang === 'ca' ? 'Tancar i revisar' : 'Cerrar y revisar'}
+          >×</button>
+        </div>
+        <div className="text-center">
+          <div className="text-6xl mb-4 animate-bounce">🚢</div>
+          <h1 className="text-2xl font-black text-white mb-2">
+            {lang === 'ca' ? '🎉 RESCATAT/DA!' : '🎉 ¡RESCATADO/A!'}
+          </h1>
+          <p className="text-amber-200 text-base mb-2 font-semibold">
+            {lang === 'ca' ? 'Has resolt totes les equacions!' : '¡Has resuelto todas las ecuaciones!'}
+          </p>
+          <p className="text-gray-300 text-sm mb-5">
+            {lang === 'ca'
+              ? 'Gràcies a les teves habilitats matemàtiques, has aconseguit tots els recursos per ser rescatat/ada. Ets un/a autèntic/a X-Hunter!'
+              : 'Gracias a tus habilidades matemáticas, has conseguido todos los recursos para ser rescatado/a. ¡Eres un auténtico X-Hunter!'}
+          </p>
+          <div className="grid grid-cols-4 gap-2 mb-6">
+            {MISSIONS.map((m) => (
+              <div key={m.id} className="flex flex-col items-center gap-1">
+                <span className="text-xl">{m.emoji}</span>
+                <span className="text-xs text-green-400 font-bold">✓</span>
+              </div>
+            ))}
           </div>
-        ))}
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="flex-1 py-2.5 rounded-xl bg-slate-700 border border-slate-600 text-white font-bold text-sm hover:bg-slate-600 transition-colors"
+            >
+              {lang === 'ca' ? '📖 Revisar missions' : '📖 Revisar misiones'}
+            </button>
+            <button
+              onClick={onRestart}
+              className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-sm hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg"
+            >
+              🏝️ {UI_STRINGS.restartBtn[lang]}
+            </button>
+          </div>
+        </div>
       </div>
-      <button
-        onClick={onRestart}
-        className="px-8 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-base hover:from-amber-400 hover:to-orange-400 transition-all shadow-xl active:scale-95"
-      >
-        🏝️ {UI_STRINGS.restartBtn[lang]}
-      </button>
     </div>
   );
 }
@@ -351,10 +370,16 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [hintIndex, setHintIndex] = useState(0);
+  const [showRescuedModal, setShowRescuedModal] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const lang = state.language;
+
+  // Show rescued modal when game is completed
+  useEffect(() => {
+    if (state.rescued) setShowRescuedModal(true);
+  }, [state.rescued]);
 
   // Persist state
   useEffect(() => {
@@ -433,8 +458,9 @@ export default function App() {
       ];
       return { ...prev, currentMission: idx, history };
     });
+    setShowRescuedModal(false);
     setHintIndex(0);
-  }, [state.completedMissions, state.currentMission, state.rescued]);
+  }, [state.completedMissions, state.currentMission, state.rescued, setShowRescuedModal]);
 
   const handleHint = useCallback(async () => {
     const mission = MISSIONS[state.currentMission];
@@ -565,6 +591,7 @@ export default function App() {
     setState(fresh);
     setHintIndex(0);
     setInputValue('');
+    setShowRescuedModal(false);
   }, [lang]);
 
   // ─── Render ────────────────────────────────────────────────────────────────
@@ -688,76 +715,89 @@ export default function App() {
 
         {/* Chat + input column */}
         <div className="flex-1 flex flex-col min-w-0 min-h-0">
-          {state.rescued ? (
-            <RescuedScreen lang={lang} onRestart={handleRestart} />
-          ) : (
-            <>
-              {/* Chat messages */}
-              <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
-                {state.history.map((msg) => (
-                  <ChatBubble key={msg.timestamp} msg={msg} />
-                ))}
-                {isLoading && (
-                  <div className="flex items-center gap-2 text-amber-300 text-sm pl-10">
-                    <i className="fa-solid fa-spinner fa-spin" />
-                    <span>{lang === 'ca' ? 'Generant pista...' : 'Generando pista...'}</span>
-                  </div>
-                )}
-                <div ref={chatEndRef} />
-              </div>
-
-              {/* Quick hint button */}
-              <div className="px-3 pb-1 flex gap-2 flex-shrink-0">
-                <button
-                  onClick={async () => {
-                    addMessage([{ role: 'user', text: UI_STRINGS.hint[lang] }]);
-                    await handleHint();
-                  }}
-                  disabled={isLoading}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold hover:bg-amber-500/30 transition-colors disabled:opacity-50"
-                >
-                  <i className="fa-solid fa-lightbulb text-xs" />
-                  {lang === 'ca' ? 'Pista' : 'Pista'}
-                </button>
-                <button
-                  onClick={() => setSidebarOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-700/50 border border-slate-600/40 text-gray-300 text-xs font-bold hover:bg-slate-700 transition-colors md:hidden"
-                >
-                  <i className="fa-solid fa-map text-xs" />
-                  {lang === 'ca' ? 'Missions' : 'Misiones'}
-                </button>
-              </div>
-
-              {/* Input bar */}
-              <div className="flex-shrink-0 px-3 pb-4 pt-1 border-t border-slate-700/50">
-                <form
-                  onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}
-                  className="flex gap-2"
-                >
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder={UI_STRINGS.inputPlaceholder[lang]}
-                    disabled={isLoading}
-                    className="flex-1 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-amber-500 focus:bg-slate-700 transition-colors disabled:opacity-50"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    inputMode="decimal"
-                  />
-                  <button
-                    type="submit"
-                    disabled={!inputValue.trim() || isLoading}
-                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 flex-shrink-0"
-                  >
-                    <i className="fa-solid fa-paper-plane text-sm" />
-                  </button>
-                </form>
-              </div>
-            </>
+          {/* Rescued modal overlay */}
+          {showRescuedModal && (
+            <RescuedModal
+              lang={lang}
+              onClose={() => setShowRescuedModal(false)}
+              onRestart={handleRestart}
+            />
           )}
+          {/* Review mode banner */}
+          {state.rescued && !showRescuedModal && (
+            <div className="flex-shrink-0 flex items-center justify-between gap-2 px-3 py-2 bg-amber-500/10 border-b border-amber-500/20 text-amber-300 text-xs font-semibold">
+              <span>📖 {lang === 'ca' ? 'Mode revisió — consulta qualsevol missió des del menú' : 'Modo revisión — consulta cualquier misión desde el menú'}</span>
+              <button onClick={() => setShowRescuedModal(true)} className="flex-shrink-0 text-amber-300 hover:text-white underline">
+                {lang === 'ca' ? 'Veure resultat' : 'Ver resultado'}
+              </button>
+            </div>
+          )}
+          {/* Chat messages */}
+          <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+            {state.history.map((msg) => (
+              <ChatBubble key={msg.timestamp} msg={msg} />
+            ))}
+            {isLoading && (
+              <div className="flex items-center gap-2 text-amber-300 text-sm pl-10">
+                <i className="fa-solid fa-spinner fa-spin" />
+                <span>{lang === 'ca' ? 'Generant pista...' : 'Generando pista...'}</span>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Quick hint button */}
+          {!state.rescued && (
+            <div className="px-3 pb-1 flex gap-2 flex-shrink-0">
+              <button
+                onClick={async () => {
+                  addMessage([{ role: 'user', text: UI_STRINGS.hint[lang] }]);
+                  await handleHint();
+                }}
+                disabled={isLoading}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold hover:bg-amber-500/30 transition-colors disabled:opacity-50"
+              >
+                <i className="fa-solid fa-lightbulb text-xs" />
+                {lang === 'ca' ? 'Pista' : 'Pista'}
+              </button>
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-700/50 border border-slate-600/40 text-gray-300 text-xs font-bold hover:bg-slate-700 transition-colors md:hidden"
+              >
+                <i className="fa-solid fa-map text-xs" />
+                {lang === 'ca' ? 'Missions' : 'Misiones'}
+              </button>
+            </div>
+          )}
+
+          {/* Input bar */}
+          <div className="flex-shrink-0 px-3 pb-4 pt-1 border-t border-slate-700/50">
+            <form
+              onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}
+              className="flex gap-2"
+            >
+              <input
+                ref={inputRef}
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder={UI_STRINGS.inputPlaceholder[lang]}
+                disabled={isLoading || state.rescued}
+                className="flex-1 bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-amber-500 focus:bg-slate-700 transition-colors disabled:opacity-50"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+                inputMode="decimal"
+              />
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || isLoading || state.rescued}
+                className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 flex-shrink-0"
+              >
+                <i className="fa-solid fa-paper-plane text-sm" />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
