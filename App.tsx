@@ -168,7 +168,7 @@ function ChatBubble({ msg }: { msg: ChatMessage }) {
         </div>
       )}
       <div
-        className={`max-w-xs md:max-w-sm lg:max-w-md px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-md ${
+        className={`max-w-[82%] px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-md ${
           isUser
             ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-tr-sm'
             : msg.isNarrative
@@ -650,7 +650,7 @@ export default function App() {
       <div className="flex-1 flex min-h-0 overflow-hidden">
 
         {/* Island map – hidden on very small screens, visible md+ */}
-        <div className="hidden md:flex flex-col w-64 lg:w-72 flex-shrink-0 border-r border-slate-700 bg-slate-900/50 p-2">
+        <div className="hidden md:flex flex-col w-80 lg:w-[26rem] xl:w-[30rem] flex-shrink-0 border-r border-slate-700 bg-slate-900/50 p-2">
           <div className="flex-1 min-h-0">
             <IslandMap
               resources={state.resources}
