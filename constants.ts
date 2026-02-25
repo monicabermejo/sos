@@ -351,21 +351,21 @@ export const MISSIONS: Mission[] = [
       es: '🏆 El capitán aparece en la borda y te grita: "¡Demuéstrame que eres lo suficientemente listo/a para navegar con nosotros! ¡Resuelve las tres ecuaciones que te mando por radio y te bajaré la escalera!"',
     },
     challenge: {
-      ca: '📻 El capità t\'envia tres equacions. Resol-les totes i escriu les tres respostes separades per comes: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Equació 1</strong> (parèntesis): <code>2(x + 3) = x − 1</code><br/>📌 <strong>Equació 2</strong> (fraccions): <code>(x + 1)/3 = (x − 2)/2</code><br/>📌 <strong>Equació 3</strong> (parèntesis múltiples): <code>2(x + 5) − 3(x − 1) = 4</code>',
-      es: '📻 El capitán te manda tres ecuaciones. Resuélvelas todas y escribe las tres respuestas separadas por comas: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Ecuación 1</strong> (paréntesis): <code>2(x + 3) = x − 1</code><br/>📌 <strong>Ecuación 2</strong> (fracciones): <code>(x + 1)/3 = (x − 2)/2</code><br/>📌 <strong>Ecuación 3</strong> (paréntesis múltiples): <code>2(x + 5) − 3(x − 1) = 4</code>',
+      ca: '📻 El capità t\'envia tres equacions complexes. Resol-les totes i escriu les tres respostes separades per comes: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Equació 1</strong> (parèntesis + negatiu):<br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Equació 2</strong> (tres fraccions):<br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Equació 3</strong> (quatre parèntesis):<br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
+      es: '📻 El capitán te manda tres ecuaciones complejas. Resuélvelas todas y escribe las tres respuestas separadas por comas: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Ecuación 1</strong> (paréntesis + negativo):<br/><code>4(x + 1) − 2(x − 3) = 3(x + 5) + 1</code><br/><br/>📌 <strong>Ecuación 2</strong> (tres fracciones):<br/><code>(x + 4)/3 + (2x − 1)/6 = (x + 7)/2</code><br/><br/>📌 <strong>Ecuación 3</strong> (cuatro paréntesis):<br/><code>5(x − 2) − 2(3x + 1) = 4(x − 3) − 3(2x − 5)</code>',
     },
-    equation: '2(x+3)=x-1 | (x+1)/3=(x-2)/2 | 2(x+5)-3(x-1)=4',
-    expectedAnswer: '-7,8,9',
+    equation: '4(x+1)-2(x-3)=3(x+5)+1 | (x+4)/3+(2x-1)/6=(x+7)/2 | 5(x-2)-2(3x+1)=4(x-3)-3(2x-5)',
+    expectedAnswer: '-6,14,15',
     hints: {
       ca: [
-        '💡 Eq.1: Expandeix els parèntesis → 2x + 6 = x − 1. Passa la x al costat esquerre i els nombres al dret. Compte: el resultat és negatiu!\nEq.2: Multiplica tots dos costats per 6 (mcm de 3 i 2) per eliminar les fraccions.\nEq.3: Expandeix els dos parèntesis amb cura dels signes negatius.',
-        '💡 Eq.1: 2x − x = −1 − 6 → x = −7 ✓\nEq.2: 6·(x+1)/3 = 6·(x−2)/2 → 2(x+1) = 3(x−2) → 2x+2 = 3x−6 → x = 8 ✓\nEq.3: 2x+10 − 3x+3 = 4 → −x+13 = 4 → −x = −9 → x = 9 ✓',
-        '💡 Les tres respostes són −7, 8 i 9. Escriu: -7, 8, 9',
+        '💡 Eq.1: Expandeix → 4x+4 − 2x+6 = 3x+15+1 → 2x+10 = 3x+16. Passa termes: −x = 6. Compte, resultat negatiu!\nEq.2: Multiplica tots els termes per 6 (mcm de 3,6,2) per eliminar denominadors i opera.\nEq.3: Expandeix els 4 parèntesis amb cura dels signes i simplifica a cada banda.',
+        '💡 Eq.1: 2x − 3x = 16 − 10 → −x = 6 → x = −6 ✓\nEq.2: 2(x+4) + (2x−1) = 3(x+7) → 2x+8+2x−1 = 3x+21 → 4x+7 = 3x+21 → x = 14 ✓\nEq.3: 5x−10 − 6x−2 = 4x−12 − 6x+15 → −x−12 = −2x+3 → x = 15 ✓',
+        '💡 Les tres respostes són −6, 14 i 15. Escriu: -6, 14, 15',
       ],
       es: [
-        '💡 Ec.1: Expande los paréntesis → 2x + 6 = x − 1. Pasa la x al lado izquierdo y los números al derecho. ¡Ojo: el resultado es negativo!\nEc.2: Multiplica ambos lados por 6 (mcm de 3 y 2) para eliminar las fracciones.\nEc.3: Expande los dos paréntesis con cuidado de los signos negativos.',
-        '💡 Ec.1: 2x − x = −1 − 6 → x = −7 ✓\nEc.2: 6·(x+1)/3 = 6·(x−2)/2 → 2(x+1) = 3(x−2) → 2x+2 = 3x−6 → x = 8 ✓\nEc.3: 2x+10 − 3x+3 = 4 → −x+13 = 4 → −x = −9 → x = 9 ✓',
-        '💡 Las tres respuestas son −7, 8 y 9. Escribe: -7, 8, 9',
+        '💡 Ec.1: Expande → 4x+4 − 2x+6 = 3x+15+1 → 2x+10 = 3x+16. Pasa términos: −x = 6. ¡Ojo, resultado negativo!\nEc.2: Multiplica todos los términos por 6 (mcm de 3,6,2) para eliminar denominadores y opera.\nEc.3: Expande los 4 paréntesis con cuidado de los signos y simplifica a cada lado.',
+        '💡 Ec.1: 2x − 3x = 16 − 10 → −x = 6 → x = −6 ✓\nEc.2: 2(x+4) + (2x−1) = 3(x+7) → 2x+8+2x−1 = 3x+21 → 4x+7 = 3x+21 → x = 14 ✓\nEc.3: 5x−10 − 6x−2 = 4x−12 − 6x+15 → −x−12 = −2x+3 → x = 15 ✓',
+        '💡 Las tres respuestas son −6, 14 y 15. Escribe: -6, 14, 15',
       ],
     },
     feedback: {
@@ -374,8 +374,8 @@ export const MISSIONS: Mission[] = [
         es: 'Alguna de las tres respuestas no es correcta. Recuerda dar los tres valores separados por comas: x₁, x₂, x₃. Escribe "pista" si necesitas ayuda.',
       },
       correct: {
-        ca: '🏆🚢🎉 INCREÏBLE! −7, 8 i 9 correctes! El capità baixa l\'escala! HAS SUPERAT TOTES LES MISSIONS I ESTÀS RESCATAT/DA! ENHORABONA, MESTRE/A DE LES EQUACIONS!',
-        es: '🏆🚢🎉 ¡INCREÍBLE! −7, 8 y 9 correctas! ¡El capitán baja la escalera! ¡HAS SUPERADO TODAS LAS MISIONES Y ESTÁS RESCATADO/A! ¡ENHORABUENA, MAESTRO/A DE LAS ECUACIONES!',
+        ca: '🏆🚢🎉 INCREÏBLE! −6, 14 i 15 correctes! El capità baixa l\'escala! HAS SUPERAT TOTES LES MISSIONS I ESTÀS RESCATAT/DA! ENHORABONA, MESTRE/A DE LES EQUACIONS!',
+        es: '🏆🚢🎉 ¡INCREÍBLE! −6, 14 y 15 correctas! ¡El capitán baja la escalera! ¡HAS SUPERADO TODAS LAS MISIONES Y ESTÁS RESCATADO/A! ¡ENHORABUENA, MAESTRO/A DE LAS ECUACIONES!',
       },
     },
   },
