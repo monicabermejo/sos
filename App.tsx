@@ -697,7 +697,7 @@ export default function App() {
           <div className="mt-2 space-y-1.5 flex-shrink-0">
             <div className="flex justify-between items-center text-xs px-1">
               <span className="text-gray-400">{lang === 'ca' ? 'Supervivència' : 'Supervivencia'}</span>
-              <span className="text-amber-300 font-bold">{state.daysOnIsland} {lang === 'ca' ? 'dies' : 'días'}</span>
+              <span className="text-amber-300 font-bold">{state.daysOnIsland} {state.daysOnIsland === 1 ? (lang === 'ca' ? 'dia' : 'día') : (lang === 'ca' ? 'dies' : 'días')}</span>
             </div>
             <div className="w-full bg-slate-700 rounded-full h-1.5">
               <div
