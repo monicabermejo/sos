@@ -332,8 +332,50 @@ export const MISSIONS: Mission[] = [
         es: 'No es correcto. Relee los datos del pitido del barco. Escribe "pista" si necesitas ayuda.',
       },
       correct: {
-        ca: '🚢🎉 x = 5! CADA 5 MINUTS! Has calculat la freqüència exacta. ESTÀS RESCATAT/DA! ENHORABONA!',
-        es: '🚢🎉 ¡x = 5! ¡CADA 5 MINUTOS! Has calculado la frecuencia exacta. ¡ESTÁS RESCATADO/A! ¡ENHORABUENA!',
+        ca: '🚢🎉 x = 5! CADA 5 MINUTS! Has calculat la freqüència exacta. Ara prepara la prova final per pujar al vaixell!',
+        es: '🚢🎉 ¡x = 5! ¡CADA 5 MINUTOS! Has calculado la frecuencia exacta. ¡Ahora prepárate para la prueba final para subir al barco!',
+      },
+    },
+  },
+  {
+    id: 9,
+    resource: 'escape',
+    emoji: '🏆',
+    colorClass: 'from-yellow-400 to-amber-600',
+    title: {
+      ca: 'Missió 9 – Puja al vaixell!',
+      es: 'Misión 9 – ¡Sube al barco!',
+    },
+    narrative: {
+      ca: '🏆 El capità apareix a la borda i et crida: "Demostra\'m que ets prou llest/a per navegar amb nosaltres! Resol les tres equacions que t\'envio per ràdio i et baixaré l\'escala!"',
+      es: '🏆 El capitán aparece en la borda y te grita: "¡Demuéstrame que eres lo suficientemente listo/a para navegar con nosotros! ¡Resuelve las tres ecuaciones que te mando por radio y te bajaré la escalera!"',
+    },
+    challenge: {
+      ca: '📻 El capità t\'envia tres equacions. Resol-les totes i escriu les tres respostes separades per comes: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Equació 1</strong> (parèntesis): <code>2(x + 3) = x − 1</code><br/>📌 <strong>Equació 2</strong> (fraccions): <code>(x + 1)/3 = (x − 2)/2</code><br/>📌 <strong>Equació 3</strong> (parèntesis múltiples): <code>2(x + 5) − 3(x − 1) = 4</code>',
+      es: '📻 El capitán te manda tres ecuaciones. Resuélvelas todas y escribe las tres respuestas separadas por comas: <em>x₁, x₂, x₃</em><br/><br/>📌 <strong>Ecuación 1</strong> (paréntesis): <code>2(x + 3) = x − 1</code><br/>📌 <strong>Ecuación 2</strong> (fracciones): <code>(x + 1)/3 = (x − 2)/2</code><br/>📌 <strong>Ecuación 3</strong> (paréntesis múltiples): <code>2(x + 5) − 3(x − 1) = 4</code>',
+    },
+    equation: '2(x+3)=x-1 | (x+1)/3=(x-2)/2 | 2(x+5)-3(x-1)=4',
+    expectedAnswer: '-7,8,9',
+    hints: {
+      ca: [
+        '💡 Eq.1: Expandeix els parèntesis → 2x + 6 = x − 1. Passa la x al costat esquerre i els nombres al dret. Compte: el resultat és negatiu!\nEq.2: Multiplica tots dos costats per 6 (mcm de 3 i 2) per eliminar les fraccions.\nEq.3: Expandeix els dos parèntesis amb cura dels signes negatius.',
+        '💡 Eq.1: 2x − x = −1 − 6 → x = −7 ✓\nEq.2: 6·(x+1)/3 = 6·(x−2)/2 → 2(x+1) = 3(x−2) → 2x+2 = 3x−6 → x = 8 ✓\nEq.3: 2x+10 − 3x+3 = 4 → −x+13 = 4 → −x = −9 → x = 9 ✓',
+        '💡 Les tres respostes són −7, 8 i 9. Escriu: -7, 8, 9',
+      ],
+      es: [
+        '💡 Ec.1: Expande los paréntesis → 2x + 6 = x − 1. Pasa la x al lado izquierdo y los números al derecho. ¡Ojo: el resultado es negativo!\nEc.2: Multiplica ambos lados por 6 (mcm de 3 y 2) para eliminar las fracciones.\nEc.3: Expande los dos paréntesis con cuidado de los signos negativos.',
+        '💡 Ec.1: 2x − x = −1 − 6 → x = −7 ✓\nEc.2: 6·(x+1)/3 = 6·(x−2)/2 → 2(x+1) = 3(x−2) → 2x+2 = 3x−6 → x = 8 ✓\nEc.3: 2x+10 − 3x+3 = 4 → −x+13 = 4 → −x = −9 → x = 9 ✓',
+        '💡 Las tres respuestas son −7, 8 y 9. Escribe: -7, 8, 9',
+      ],
+    },
+    feedback: {
+      wrong: {
+        ca: 'Alguna de les tres respostes no és correcta. Recorda de donar els tres valors separats per comes: x₁, x₂, x₃. Escriu "pista" si necessites ajuda.',
+        es: 'Alguna de las tres respuestas no es correcta. Recuerda dar los tres valores separados por comas: x₁, x₂, x₃. Escribe "pista" si necesitas ayuda.',
+      },
+      correct: {
+        ca: '🏆🚢🎉 INCREÏBLE! −7, 8 i 9 correctes! El capità baixa l\'escala! HAS SUPERAT TOTES LES MISSIONS I ESTÀS RESCATAT/DA! ENHORABONA, MESTRE/A DE LES EQUACIONS!',
+        es: '🏆🚢🎉 ¡INCREÍBLE! −7, 8 y 9 correctas! ¡El capitán baja la escalera! ¡HAS SUPERADO TODAS LAS MISIONES Y ESTÁS RESCATADO/A! ¡ENHORABUENA, MAESTRO/A DE LAS ECUACIONES!',
       },
     },
   },
@@ -391,4 +433,5 @@ export const RESOURCE_LABELS: Record<string, Record<'ca' | 'es', string>> = {
   raft:     { ca: 'Balsa',    es: 'Balsa'     },
   signal:   { ca: 'Senyal',   es: 'Señal'     },
   rescue:   { ca: 'Rescat!',  es: '¡Rescate!' },
+  escape:   { ca: 'Escapada!', es: '¡Escapada!' },
 };

@@ -8,7 +8,8 @@ export type ResourceType =
   | 'medicine'
   | 'raft'
   | 'signal'
-  | 'rescue';
+  | 'rescue'
+  | 'escape';
 
 export interface Mission {
   id: number;

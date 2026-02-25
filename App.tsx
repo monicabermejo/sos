@@ -16,6 +16,7 @@ const RESOURCE_POSITIONS: Record<ResourceType, { top: string; left: string }> = 
   raft:     { top: '72%', left: '42%' },
   signal:   { top: '65%', left: '58%' },
   rescue:   { top: '48%', left: '50%' },
+  escape:   { top: '30%', left: '50%' },
 };
 
 function buildInitialState(lang: Language): GameState {
