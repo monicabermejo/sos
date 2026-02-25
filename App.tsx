@@ -251,22 +251,25 @@ function Sidebar({
           {MISSIONS.map((mission, idx) => {
             const done = state.completedMissions.includes(mission.id);
             const isCurrent = state.currentMission === idx && !state.rescued;
+            const isLocked = !done && !isCurrent;
             return (
               <button
                 key={mission.id}
-                onClick={() => { onJump(idx); onClose(); }}
+                disabled={isLocked}
+                onClick={() => { if (!isLocked) { onJump(idx); onClose(); } }}
                 className={`w-full text-left rounded-xl px-3 py-2.5 flex items-center gap-3 transition-all text-sm font-semibold border ${
                   isCurrent
                     ? 'bg-amber-500/20 border-amber-500/50 text-amber-200'
                     : done
-                    ? 'bg-green-500/10 border-green-500/30 text-green-300'
-                    : 'bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700'
+                    ? 'bg-green-500/10 border-green-500/30 text-green-300 hover:bg-green-500/20 cursor-pointer'
+                    : 'bg-slate-800/40 border-slate-700/40 text-gray-600 cursor-not-allowed opacity-50'
                 }`}
               >
-                <span className="text-lg">{mission.emoji}</span>
+                <span className={`text-lg ${isLocked ? 'grayscale' : ''}`}>{mission.emoji}</span>
                 <span className="flex-1 leading-tight">{mission.title[lang]}</span>
                 {done && <i className="fa-solid fa-circle-check text-green-400 text-xs" />}
                 {isCurrent && <i className="fa-solid fa-location-dot text-amber-400 text-xs animate-pulse" />}
+                {isLocked && <i className="fa-solid fa-lock text-gray-600 text-xs" />}
               </button>
             );
           })}
@@ -405,6 +408,8 @@ export default function App() {
 
   const handleJumpToLevel = useCallback((idx: number) => {
     const mission = MISSIONS[idx];
+    const isAccessible = state.completedMissions.includes(mission.id) || state.currentMission === idx;
+    if (!isAccessible) return;
     setState((prev) => {
       const history: ChatMessage[] = [
         {
@@ -422,7 +427,7 @@ export default function App() {
       return { ...prev, currentMission: idx, history };
     });
     setHintIndex(0);
-  }, []);
+  }, [state.completedMissions, state.currentMission]);
 
   const handleHint = useCallback(async () => {
     const mission = MISSIONS[state.currentMission];
