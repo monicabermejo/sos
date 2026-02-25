@@ -221,7 +221,7 @@ function HelpModal({ lang, onClose }: { lang: Language; onClose: () => void }) {
           onClick={onClose}
           className="mt-6 flex-shrink-0 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-sm hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg"
         >
-          {lang === 'ca' ? '¡Endavant!' : '¡Adelante!'}
+          {lang === 'ca' ? 'Endavant!' : '¡Adelante!'}
         </button>
       </div>
     </div>
